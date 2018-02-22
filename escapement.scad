@@ -1,14 +1,17 @@
+// PREFERENCES
+WHEEL_HEIGHT=2;
+
 // Ring
-module Ring(height, radius, thickness) {
+module Ring(radius, thickness, height=WHEEL_HEIGHT) {
     difference() {
         cylinder(height, r=radius);
         cylinder(height, r=radius-thickness);
     }
 }
 
-// Escapement
-module EscapementWheelCog(lenght=10,crook=5,thickness=3) {
-    linear_extrude(2) {
+// Escapement wheel
+module EscapementWheelCog(lenght=10,crook=5,thickness=3,height=WHEEL_HEIGHT) {
+    linear_extrude(height) {
         polygon([
             [0,-thickness/2],
             [0,thickness/2],
@@ -17,7 +20,7 @@ module EscapementWheelCog(lenght=10,crook=5,thickness=3) {
     }
 }
 
-module EscapementWheel(height, radius, cog_count) {
+module EscapementWheel(radius, cog_count, height=WHEEL_HEIGHT) {
     union() {
         Ring(height, radius, radius/10);
         Ring(height, radius/5, radius/10);
@@ -40,6 +43,13 @@ module EscapementWheel(height, radius, cog_count) {
     }
 }
 
+// Escapement lock
+module EscapementLock(width) {
+    
+}
+
 
 // Demo
-EscapementWheel(2, 20, 16);
+EscapementWheel(20, 17);
+
+
